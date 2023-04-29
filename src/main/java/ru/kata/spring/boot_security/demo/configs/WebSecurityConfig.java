@@ -32,6 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
+                .cors().disable()
                 .authorizeRequests()
                 .antMatchers( "/login").anonymous()
                 .antMatchers("/admin/**").hasRole("ADMIN")
@@ -49,8 +51,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .logout()
                 .permitAll()
                 .logoutSuccessUrl("/login?logout")
-                    .and()
-                .csrf().disable();
+                    .and();
+
     }
 
         @Bean
