@@ -31,12 +31,27 @@
     <input type="text" th:field="*{login}" id="login"/>
     <br>
     <br>
+    <label for="password"><h3>Введите пароль</h3></label>
+    <input type="text" th:field="*{password}" id="password"/>
 <!--    <label for="role"><h3>Введите уровень доступа</h3></label>-->
 <!--    <input type="text" th:field="*{roles}" id="role"/>-->
-    <input type=checkbox id=adminId name=roles[] value="ROLE_ADMIN">
-    <label for="adminId">ADMIN</label>
-    <input type=checkbox id=userId name=roles[] value="ROLE_USER">
-    <label for="userId">USER</label>
+<!--    <input type=checkbox id=adminId name=roles[] value="ROLE_ADMIN">-->
+<!--    <label for="adminId">ADMIN</label>-->
+<!--    <input type=checkbox id=userId name=roles[] value="ROLE_USER">-->
+<!--    <label for="userId">USER</label>-->
+    <td bgcolor="#f0f8ff">
+        <div>
+            <h3><label>Уровень доступа:</label></h3>
+            <label>
+                <input type="checkbox" th:field="*{roles}" th:value="ROLE_USER" />
+                USER
+            </label>
+            <label>
+                <input type="checkbox" th:field="*{roles}" th:value="ROLE_ADMIN" />
+                ADMIN
+            </label>
+        </div>
+    </td>
     <br>
     <br>
     </br/>
