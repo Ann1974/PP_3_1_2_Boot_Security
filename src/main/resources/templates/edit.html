@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать список пользователей</title>
+</head>
+<form action="#" th:action="@{/logout}" method="get">
+    <input  style="border-color: lightskyblue"  type="submit" value="ВЫХОД"/>
+</form>
+<form><button>
+    <a th:if="${#lists.contains(#authorization.expression('hasAnyRole(''ROLE_USER'',''ROLE_ADMIN'')'), true)}"
+       th:href="${#authorization.expression('hasRole(''ROLE_ADMIN'')') ? '/admin' : '/login'}">ВЕРНУТЬСЯ В ПАНЕЛЬ
+        АДМИНИСТРАТОРА</a></button>
+</form>
+<body bgcolor="#afeeee">
+<table class ="italic">
+    <h1><p style="text-align: center">Изменение данных</p></h1>
+    <tr>
+        <form th:method="patch" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}" id="edit-form">
+            <td bgcolor="#ffd700">
+                <label for="id"><h3>ID</h3></label>
+                <input readonly type="number" th:field="*{id}" id="id" placeholder="id">
+            </td>
+            <td bgcolor="#f0f8ff">
+                <label for="name"><h3>Имя</h3></label><input type="text" th:field="*{name}" id="name"/>
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+            </td>
+            <td bgcolor="#f0f8ff">
+                <label for="last_name"><h3>Фамилия</h3></label><input type="text" th:field="*{lastName}" id="last_Name">
+                <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName error</div>
+            </td>
+            <td bgcolor="#f0f8ff">
+                <label for="last_name"><h3>Возраст</h3></label><input type="text" th:field="*{age}" id="age">
+                <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age error</div>
+            </td>
+            <td bgcolor="#f0f8ff">
+                <label for="last_name"><h3>Логин</h3></label><input type="text" th:field="*{login}" id="login">
+                <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}">login error</div>
+            </td>
+            <td bgcolor="#f0f8ff">
+                <label for="last_name"><h3>Пароль</h3></label><input type="text" th:field="*{password}" id="password">
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password error</div>
+            </td>
+            <td bgcolor="#f0f8ff">
+                <div>
+                    <h3><label>Уровень доступа:</label></h3>
+                    <label>
+                        <input type="checkbox" th:field="*{roles}" th:value="ROLE_USER" />
+                        USER
+                    </label>
+                    <label>
+                        <input type="checkbox" th:field="*{roles}" th:value="ROLE_ADMIN" />
+                        ADMIN
+                    </label>
+                </div>
+            </td>
+            <input type="submit" value="ОБНОВИТЬ ПОЛЬЗОВАТЕЛЯ"/>
+        </form>
+    </tr>
+    <br/>
+</table>
