@@ -34,11 +34,8 @@
         <h3><th bgcolor="#f0f8ff">
   <span th:each="role : ${user.getRoles()}"><span th:text="${#strings.substringAfter(role.getName(), '_')}"></span>
   </span></th></h3>
-
     </tr>
 </table>
 <br>
-
-
 </body>
 </html>
