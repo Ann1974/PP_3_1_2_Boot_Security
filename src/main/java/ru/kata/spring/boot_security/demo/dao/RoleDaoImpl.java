@@ -5,6 +5,7 @@ import ru.kata.spring.boot_security.demo.model.Role;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.HashSet;
 import java.util.Set;
 @Repository
 public class RoleDaoImpl implements RoleDao{
@@ -16,9 +17,13 @@ public class RoleDaoImpl implements RoleDao{
         return entityManager.find(Role.class, id);
     }
 
+//    @Override
+//    public Set<Role> getAllRoles() {
+//        return (Set<Role>) entityManager.createQuery("SELECT  r FROM Role  r", Role.class).getResultList();
+//    }
     @Override
     public Set<Role> getAllRoles() {
-        return (Set<Role>) entityManager.createQuery("SELECT  r FROM Role  r", Role.class).getResultList();
+        return new HashSet<>(entityManager.createQuery("SELECT r FROM Role r", Role.class).getResultList());
     }
 
     @Override
