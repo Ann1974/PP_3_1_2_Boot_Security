@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <title>Новый пользователь</title>
 </head>
+<form action="#" th:action="@{/logout}" method="get">
+    <input  style="border-color: lightskyblue"  type="submit" value="ВЫХОД"/>
+</form>
+<br>
+<form><button>
+    <a th:if="${#lists.contains(#authorization.expression('hasAnyRole(''ROLE_USER'',''ROLE_ADMIN'')'), true)}"
+       th:href="${#authorization.expression('hasRole(''ROLE_ADMIN'')') ? '/admin' : '/login'}">ВЕРНУТЬСЯ В ПАНЕЛЬ
+        АДМИНИСТРАТОРА</a></button>
+</form>
 <body  bgcolor="#afeeee">
 <h1 align="center" >Ввод данных</h1>
 <form  align="center" class="table table-hover"  th:method="POST" th:action="@{/admin}" th:object="${user}">

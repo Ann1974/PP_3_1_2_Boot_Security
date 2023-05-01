@@ -48,4 +48,20 @@ public class AdminController {
 
     }
 
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id")Long id) {
+        model.addAttribute("user", userService.getUserById(id));
+        return "edit";
+    }
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
+        return "redirect:/admin";
+    }
+    @DeleteMapping("{id}")
+    public String delete(@PathVariable("id") Long id) {
+        userService.removeUserById(id);
+        return "redirect:/admin";
+    }
+
 }

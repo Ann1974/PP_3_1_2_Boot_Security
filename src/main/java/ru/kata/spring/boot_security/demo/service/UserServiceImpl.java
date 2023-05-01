@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updateUser(User updateUser) {
-        userDao.updateUser(encryptUserPassword(updateUser));
+        userDao.updateUser(updateUser);
 
     }
 
