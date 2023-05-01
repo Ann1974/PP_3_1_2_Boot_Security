@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Новый пользователь</title>
+</head>
+<body  bgcolor="#afeeee">
+<h1 align="center" >Ввод данных</h1>
+<form  align="center" class="table table-hover"  th:method="POST" th:action="@{/admin}" th:object="${user}">
+    <h3> <label bgcolor="#f0e68c" for="name">Введите имя</label></h3>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br>
+    <label for="lastName"><h3>Введите фамилию</h3></label>
+    <input type="text" th:field="*{lastName}" id="lastName"/>
+    <br>
+    <br>
+    <label for="age"><h3>Введите возраст</h3></label>
+    <input type="text" th:field="*{age}" id="age"/>
+    <br>
+    <br>
+    <label for="login"><h3>Введите логин</h3></label>
+    <input type="text" th:field="*{login}" id="login"/>
+    <br>
+    <br>
+<!--    <label for="role"><h3>Введите уровень доступа</h3></label>-->
+<!--    <input type="text" th:field="*{roles}" id="role"/>-->
+    <input type=checkbox id=adminId name=roles[] value="ROLE_ADMIN">
+    <label for="adminId">ADMIN</label>
+    <input type=checkbox id=userId name=roles[] value="ROLE_USER">
+    <label for="userId">USER</label>
+    <br>
+    <br>
+    </br/>
+    <tr >
+        <th> <form><input type="submit" value="СОЗДАТЬ"/></form></th>
+    </tr>
+</form>
+</body>
+</html>

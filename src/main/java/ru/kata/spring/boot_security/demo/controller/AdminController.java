@@ -29,21 +29,18 @@ public class AdminController {
     }
 
     @GetMapping("/user/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public String showUser(@PathVariable Long id, Model model) {
         User user = userService.getUserById(id);
         model.addAttribute("user", user);
         return "user";
     }
     @GetMapping("/newUser")
-    @PreAuthorize("hasRole('ADMIN')")
     public String newUser(Model model) {
         model.addAttribute("user", new User());
         return "newUser";
     }
 
     @PostMapping("/")
-    @PreAuthorize("hasRole('ADMIN')")
     public String create(@ModelAttribute("user") User user,Model model ) {
         userService.saveUser(user);
         model.addAttribute("user", user);

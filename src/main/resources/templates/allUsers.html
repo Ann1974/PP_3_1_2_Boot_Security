@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Панель администратора</title>
+</head>
+<body bgcolor="#afeeee">
+<ul class="nav nav-pills">
+    <li><form action="#" th:action="@{/logout}" method="get">
+        <input  style="border-color: lightskyblue"  type="submit" value="ВЫХОД"/>
+        </form>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="user">ПАНЕЛЬ ПОЛЬЗОВАТЕЛЯ</a>
+    </li>
+</ul>
+ <table  align="center" class="table table-hover" >
+    <h1 style="color: #191a1a" ><p style="text-align: center">Панель администратора</p> </h1>
+    <tr border="2"  bgcolor="#f0f8ff" >
+        <th  bgcolor="#ffd700"><h2>Id</h2></th>
+        <th><h3>ИМЯ</h3></th>
+        <th><h3>ФАМИЛИЯ</h3></th>
+        <th><h3>ВОЗРАСТ</h3></th>
+        <th><h3>ЛОГИН</h3></th>
+        <th><h3>УРОВЕНЬ ДОСТУПА</h3></th>
+        <th bgcolor="b0c4de">
+            <form  action="/newUser">
+                <button><h3>Добавить пользователя</h3></button>
+            </form>
+        </th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <th bgcolor="#ffd700"><a th:href="@{/user/{id}(id=${user.getId()})}" th:utext="${user.getId()}"></a></th>
+        <th bgcolor="#f0f8ff" th:utext="${user.getName()}"></th>
+        <th bgcolor="#f0f8ff" th:utext="${user.getLastName()}"></th>
+        <th bgcolor="#f0f8ff" th:utext="${user.getAge()}"></th>
+        <th bgcolor="#f0f8ff" th:utext="${user.getLogin()}"></th>
+        <th bgcolor="#f0f8ff">
+  <span th:each="role : ${user.getRoles()}"><span th:text="${#strings.substringAfter(role.getName(), '_')}"></span>
+  </span>
+        </th>
+        <td bgcolor="b0c4de">
+            <form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
+                <input type="submit" value="УДАЛИТЬ">
+            </form>
+            <a th:href="@{/views/{id}/edit(id=${user.getId()})}">
+                <button>РЕДАКТИРОВАТЬ</button></a>
+        </td>
+        <td>
+
+        </td>
+    </tr></h3>
+</table>
+</body>
+</html>
