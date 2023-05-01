@@ -15,7 +15,7 @@
 </form>
 <body  bgcolor="#afeeee">
 <h1 align="center" >Ввод данных</h1>
-<form  align="center" class="table table-hover"  th:method="POST" th:action="@{/admin}" th:object="${user}">
+<form  align="center" class="table table-hover"  th:method="POST" th:action="@{/admin/new}" th:object="${user}">
     <h3> <label bgcolor="#f0e68c" for="name">Введите имя</label></h3>
     <input type="text" th:field="*{name}" id="name"/>
     <br>
