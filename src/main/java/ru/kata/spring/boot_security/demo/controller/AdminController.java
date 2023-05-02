@@ -53,6 +53,10 @@ public class AdminController {
     }
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user) {
+        if(user.getRoles() == null || user.getRoles().isEmpty()){
+            User newUser = userService.getUserById(user.getId());
+            user.setRoles(newUser.getRoles());
+        }
         userService.updateUser(user);
         return "redirect:/admin";
     }
