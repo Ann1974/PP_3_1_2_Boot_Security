@@ -46,14 +46,16 @@
             <td bgcolor="#f0f8ff">
                 <div>
                     <h3><label>Уровень доступа:</label></h3>
-                    <label>
-                        <input type="checkbox" th:field="*{roles}" th:value="ROLE_USER" />
-                        USER
-                    </label>
-                    <label>
-                        <input type="checkbox" th:field="*{roles}" th:value="ROLE_ADMIN" />
-                        ADMIN
-                    </label>
+                    <div>
+                        <label>
+                            <input type="checkbox" th:field="*{roles}" th:value="ROLE_USER " />
+                            USER
+                        </label>
+                        <label>
+                            <input type="checkbox" th:field="*{roles}" th:value="ROLE_ADMIN" />
+                            ADMIN
+                        </label>
+                    </div>
                 </div>
             </td>
             <br>

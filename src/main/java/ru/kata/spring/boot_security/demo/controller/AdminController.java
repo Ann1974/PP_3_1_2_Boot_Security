@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
@@ -40,7 +41,10 @@ public class AdminController {
     }
 
     @PostMapping("/new")
-    public String create(@ModelAttribute("user") User user,Model model ) {
+    public String create(@ModelAttribute("user") User user, BindingResult result, Model model ) {
+        if (result.hasErrors()) {
+            return "newUser";
+        }
         userService.saveUser(user);
         model.addAttribute("user", user);
         return "redirect:/admin";
@@ -58,6 +62,7 @@ public class AdminController {
             user.setRoles(newUser.getRoles());
         }
         userService.updateUser(user);
+
         return "redirect:/admin";
     }
 
