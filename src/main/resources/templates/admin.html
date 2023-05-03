@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Панель администратора</title>
+    <style>
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            margin: 20px auto;
+            max-width: 800px;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #90bce7;
+        }
+    </style>
 </head>
-<body >
+<body>
 <ul class="nav nav-pills">
     <li>
         <form action="#" th:action="@{/logout}" method="get">
@@ -12,36 +27,36 @@
         </form>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/user"> ПАНЕЛЬ ПОЛЬЗОВАТЕЛЯ</a>
+        <a class="nav-link active" aria-current="page"
+           href="/user"> ПАНЕЛЬ ПОЛЬЗОВАТЕЛЯ</a>
     </li>
 </ul>
 <h2 style="text-align: center">Панель администратора</h2>
-<table style="align-content: center" class="table table-hover">
-
-    <tr >
-        <th ><h2>Id</h2></th>
+<table>
+    <tr>
+        <th><h2>Id</h2></th>
         <th><h3>ИМЯ</h3></th>
         <th><h3>ФАМИЛИЯ</h3></th>
         <th><h3>ВОЗРАСТ</h3></th>
         <th><h3>ЛОГИН</h3></th>
         <th><h3>УРОВЕНЬ ДОСТУПА</h3></th>
-        <th >
+        <th>
             <form action="/admin/newUser">
                 <button>Добавить пользователя</button>
             </form>
         </th>
     </tr>
     <tr th:each="user : ${users}">
-        <th ><a th:href="@{/admin/user/{id}(id=${user.getId()})}" th:utext="${user.getId()}"></a></th>
-        <th  th:utext="${user.getName()}"></th>
-        <th  th:utext="${user.getLastName()}"></th>
-        <th  th:utext="${user.getAge()}"></th>
-        <th  th:utext="${user.getLogin()}"></th>
-        <th >
-  <span th:each="role : ${user.getRoles()}"><span th:text="${#strings.substringAfter(role.getName(), '_')}"></span>
-  </span>
-        </th>
-        <td >
+        <td><a th:href="@{/admin/user/{id}(id=${user.getId()})}" th:utext="${user.getId()}"></a></td>
+        <td th:utext="${user.getName()}"></td>
+        <td th:utext="${user.getLastName()}"></td>
+        <td th:utext="${user.getAge()}"></td>
+        <td th:utext="${user.getLogin()}"></td>
+        <td>
+                <span th:each="role : ${user.getRoles()}"><span th:text="${#strings.substringAfter(role.getName(), '_')}"></span>
+                </span>
+        </td>
+        <td>
             <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
                 <input type="submit" value="УДАЛИТЬ">
             </form>
@@ -49,9 +64,7 @@
                 <button>РЕДАКТИРОВАТЬ</button>
             </a>
         </td>
-        <td>
-        </td>
-
+    </tr>
 </table>
 </body>
 </html>

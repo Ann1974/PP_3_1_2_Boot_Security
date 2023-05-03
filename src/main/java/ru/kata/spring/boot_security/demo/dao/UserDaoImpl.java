@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.dao;
 
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.User;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -39,14 +38,13 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public User getUserById(Long id) {
-        return entityManager.find(User.class, id);
+        TypedQuery<User> query = entityManager.createQuery(
+                "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.roles WHERE u.id = :id",
+                User.class
+        );
+        query.setParameter("id", id);
+        return query.getSingleResult();
     }
-
-//    @Override
-//    public User findByLogin(String login) {
-//        return entityManager.createQuery("select u from User u LEFT JOIN FETCH u.roles where u.login =:login", User.class)
-//                .setParameter("login", login).getSingleResult();
-//    }
 
     @Override
     public User findByLogin(String login) {

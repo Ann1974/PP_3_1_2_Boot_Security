@@ -81,9 +81,7 @@ public class UserServiceImpl implements UserService {
         System.out.println(user);
         if (user == null)
             throw new UsernameNotFoundException("Пользователь не найден");
-
         return user;
     }
-
 
 }

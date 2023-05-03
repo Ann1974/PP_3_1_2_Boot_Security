@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Новый пользователь</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 2px solid #5d97d5;
+            margin: 10px;
+        }
+        th, td {
+            border: 1px solid #90bce7;
+            padding: 5px;
+        }
+    </style>
 </head>
 <form action="#" th:action="@{/logout}" method="get">
     <input  style="border-color: lightskyblue"  type="submit" value="ВЫХОД"/>
@@ -14,49 +25,56 @@
         АДМИНИСТРАТОРА</a></button>
 </form>
 <body >
-<h1 style="text-align: center">Ввод данных</h1>
-<div>
-<form  class="table table-hover"  th:method="POST" th:action="@{/admin/new}" th:object="${user}">
+<table>
+    <tr>
+        <th colspan="2"><h1 style="text-align: center">Ввод данных</h1></th>
+    </tr>
+    <tr>
+        <td>
+            <div>
+                <form th:method="POST" th:action="@{/admin/new}" th:object="${user}">
+                    <label for="name">Введите имя</label>
+                    <input type="text" th:field="*{name}" id="name"/>
+                    <div></div><br>
 
-    <label  for="name">Введите имя</label>
-    <input type="text" th:field="*{name}" id="name"/>
-     <div></div><br>
+                    <label for="lastName">Введите фамилию</label>
+                    <input type="text" th:field="*{lastName}" id="lastName"/>
+                    <div></div><br>
 
-    <label for="lastName">Введите фамилию</label>
-    <input type="text" th:field="*{lastName}" id="lastName"/>
-     <div></div><br>
+                    <label for="age">Введите возраст</label>
+                    <input type="text" th:field="*{age}" id="age"/>
+                    <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}"
+                       style="color: #ec1f1f;"><label for="age"></label>
+                    </p>
+                    <div></div><br>
 
-    <label for="age">Введите возраст</label>
-    <input type="text" th:field="*{age}" id="age"/>
-    <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}"
-       style="color: #ec1f1f;"><label for="age"></label>
-    </p>
-    <div></div><br>
+                    <label for="login">Введите логин</label>
+                    <input type="text" th:field="*{login}" id="login"/>
+                    <div></div><br>
 
-    <label for="login">Введите логин</label>
-    <input type="text" th:field="*{login}" id="login"/>
-    <div></div><br>
+                    <label for="password">Введите пароль</label>
+                    <input type="text" th:field="*{password}" id="password"/>
+                    <div></div><br>
 
-    <label for="password">Введите пароль</label>
-    <input type="text" th:field="*{password}" id="password"/>
-    <div></div><br>
-
-        <div>
-            <h3><label>Уровень доступа:</label></h3>
-            <label>
-                <input type="checkbox" th:field="*{roles}" th:value="ROLE_USER"/>
-                USER
-            </label>
-            <label>
-                <input type="checkbox" th:field="*{roles}" th:value="ROLE_ADMIN"/>
-                ADMIN
-            </label>
-        </div>
-    <br>
-    <br>
-    </br/>
-    <form><input type="submit" value="СОЗДАТЬ"/></form>
-</form>
-</div>
+                    <div>
+                        <h3><label>Уровень доступа:</label></h3>
+                        <label>
+                            <input type="checkbox" th:field="*{roles}" th:value="ROLE_USER"/>
+                            USER
+                        </label>
+                        <label>
+                            <input type="checkbox" th:field="*{roles}" th:value="ROLE_ADMIN"/>
+                            ADMIN
+                        </label>
+                    </div>
+                    <br>
+                    <br>
+                    </br/>
+                    <form><input type="submit" value="СОЗДАТЬ"/></form>
+                </form>
+            </div>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

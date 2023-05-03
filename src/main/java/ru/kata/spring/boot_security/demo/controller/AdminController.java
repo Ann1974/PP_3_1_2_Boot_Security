@@ -55,6 +55,8 @@ public class AdminController {
         model.addAttribute("user", userService.getUserById(id));
         return "edit";
     }
+
+
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user) {
         if(user.getRoles() == null || user.getRoles().isEmpty()){
