@@ -11,12 +11,6 @@ import ru.kata.spring.boot_security.demo.model.User;
 @RequestMapping("/")
 public class UserController {
 
-//    @RequestMapping("/")
-//    public String goToThePasswordEntryPage() {
-//        return "redirect:/login";
-//
-//    }
-
     @GetMapping(value = "login")
     public String getLogin() {
         return "login";
