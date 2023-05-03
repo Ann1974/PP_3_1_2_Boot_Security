@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,6 +13,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
@@ -22,7 +24,6 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
          this.passwordEncoder = passwordEncoder;
     }
-
 
     private User encryptUserPassword(User user){
        user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -54,10 +55,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+        List<User> users = userDao.getAllUsers();
+        for (User user : users) {
+            Hibernate.initialize(user.getRoles());
+        }
+        return users;
     }
-
-
 
     @Override
     public User getUserById(Long id) {
@@ -72,6 +75,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         User user = userDao.findByLogin(login);
         System.out.println(user);
@@ -80,4 +84,6 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
+
+
 }
